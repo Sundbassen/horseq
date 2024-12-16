@@ -9,7 +9,6 @@ import (
 
 	"github.com/peterbourgon/ff/v4"
 	"github.com/peterbourgon/ff/v4/ffhelp"
-	"github.com/sundbassen/horseq/internal/util"
 )
 
 func Exec(
@@ -23,9 +22,6 @@ func Exec(
 	root := NewRootCmd(stdin, stdout, stderr)
 	_ = NewDPCmd(root)
 	defer func() {
-		if errors.Is(err, util.ErrCliRequiredFlags) {
-			fmt.Fprintf(stderr, "\nerror: %s\n", err)
-		}
 
 		if errors.Is(err, ff.ErrHelp) {
 			fmt.Fprintf(stderr, "\n%s\n", ffhelp.Command(root.Command))

@@ -18,9 +18,6 @@ type DPCmdOptions struct {
 	// GCP project ID
 	ProjectID string
 
-	// GCP region
-	Region string
-
 	// CSV file path
 	CsvPath string
 
@@ -40,9 +37,8 @@ func NewDPCmd(parent *RootCmd) *DPCmd {
 	cmd.Opts.Root = &parent.Opts
 	cmd.root = parent
 	cmd.Flags = ff.NewFlagSet("datapipeline").SetParent(parent.Flags)
-	cmd.Flags.StringVar(&cmd.Opts.BucketName, 'n', "name", "gs://example-bucket-1-bananas/", "Name of bucket to read from")
 	cmd.Flags.StringVar(&cmd.Opts.ProjectID, 'p', "project-id", "", "GCP project ID")
-	cmd.Flags.StringVar(&cmd.Opts.Region, 'r', "region", "europe-west1", "GCP region")
+	cmd.Flags.StringVar(&cmd.Opts.BucketName, 'b', "bucket", "", "Name of GCP bucket to read from")
 	cmd.Flags.StringVar(&cmd.Opts.CsvPath, 'c', "csv-path", "", "Path to CSV file in bucket")
 
 	cmd.Command = &ff.Command{
